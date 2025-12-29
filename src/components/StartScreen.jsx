@@ -1,73 +1,24 @@
-import { useState } from 'react';
+import React from 'react';
 
 const StartScreen = ({ onStart }) => {
-  const [selectedMode, setSelectedMode] = useState('normal');
-
-  const gameModes = [
-    {
-      id: 'normal',
-      name: 'Klasik Mod',
-      description: 'Sınırsız süre, 2 hak ve ipucu hakkı',
-      difficulty: 'Kolay'
-    },
-    {
-      id: 'speed',
-      name: 'Hız Modu',
-      description: '30 saniye süre, ipucu yok',
-      difficulty: 'Orta'
-    },
-    {
-      id: 'expert',
-      name: 'Uzman Modu',
-      description: 'Tek hak, ipucu yok',
-      difficulty: 'Zor'
-    }
-  ];
-
   return (
-    <div className="start-screen">
-      <div className="logo">
-        <img src="/vite.svg" alt="Game Logo" />
-      </div>
+    <div className="screen-container">
+      <h2>Hangisi Yapay Zeka?</h2>
+      <p>Aşağıdaki görsellerden hangisinin AI tarafından üretildiğini bulmaya çalış!</p>
       
-      <h1>AI Görsel Dedektifi</h1>
-      
-      <div className="game-description">
-        <h2>Oyun Kuralları</h2>
-        <p>
-          Karşınıza çıkan 3 görsel arasından hangisinin yapay zeka tarafından 
-          üretildiğini bulmaya çalışın!
-        </p>
-        <ul>
-          <li>✓ İlk tahmininiz yanlışsa ipucu alabilirsiniz</li>
-          <li>✓ İkinci bir tahmin hakkınız olacak</li>
-          <li>✓ Doğru tahmin yaparak puan kazanın</li>
-        </ul>
-      </div>
-
       <div className="mode-selection">
-        <h3>Oyun Modu Seçin:</h3>
-        <div className="mode-cards">
-          {gameModes.map((mode) => (
-            <div
-              key={mode.id}
-              className={`mode-card ${selectedMode === mode.id ? 'selected' : ''}`}
-              onClick={() => setSelectedMode(mode.id)}
-            >
-              <h4>{mode.name}</h4>
-              <p className="difficulty">{mode.difficulty}</p>
-              <p className="description">{mode.description}</p>
-            </div>
-          ))}
+        <div className="card">
+          <h3>Klasik Mod</h3>
+          <p>Yanlış yaparsan ipucu alırsın, tekrar denersin. Sakin oyun.</p>
+          <button onClick={() => onStart('classic')}>Klasik Mod Oyna</button>
+        </div>
+
+        <div className="card">
+          <h3>Zaman Karşı (Time Attack)</h3>
+          <p>İpucu yok! 30 saniyen var. En çok doğruyu yap.</p>
+          <button onClick={() => onStart('timeAttack')} className="btn-danger">Zaman Modu Oyna</button>
         </div>
       </div>
-
-      <button 
-        className="start-button"
-        onClick={() => onStart(selectedMode)}
-      >
-        Oyuna Başla
-      </button>
     </div>
   );
 };
